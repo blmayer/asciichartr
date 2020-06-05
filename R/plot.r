@@ -73,7 +73,7 @@ asciiPlot <- function(series, cfg=list()) {
   for (y in min2:max2) {
     label <- sprintf(placeholder, maximum - ((y - min2) * interval / ifelse(rows == 0, 1, rows)))
     result[y - min2+1, max(offset - length(label)-1, 1)] <- label
-    result[y - min2+1, offset] <- ifelse(y == 0, symbols[[1]], symbols[[2]])  # zero tick mark
+    result[y - min2-1, offset] <- ifelse(y == 0, symbols[1], symbols[2])  # zero tick mark
   }
   
   # first value is a tick mark across the y-axis
