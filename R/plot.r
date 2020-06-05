@@ -1,33 +1,35 @@
-
 #' ASCII chart of vector. Generate an ascii chart for a series of numbers.
 #'
 #' \code{asciiPlot} returns a character string of a chart for given series.
 #
 #' @param series A numeric vector, missing data values in the
 #' series can be specified as a NA.
-#' 
+#'
 #' @param cfg A named list with some options: \code{height} specifies the
 #' number of rows the graph should occupy. It can be  used to scale down a
 #' graph with large data values. \code{format} specifies a C format string
 #' used to format the labels on the y-axis. The default value is "%.2f".
-#' \code{min} and \code{max} will clamp the y-axis and all values.
-#' \code{offset} changes what column will the y-axis be drawn. Default is 3.
-#' 
+#' \code{symbols} provides a list of single characters to use for drawing
+#' the curve. \code{offset} changes what column will the y-axis be drawn.
+#' Default is 3. \code{min} and \code{max} will clamp the y-axis and all
+#' values.
+#'
 #' @return A character string
-#' 
+#'
 #' @examples
 #' series <- c(1,2,3,4,4,3,2,1)
 #' cat(asciiPlot(series))
 #'
 #' series <- c(1,2,3,NA,4,3,NA,1)
 #' cat(asciiPlot(series))
-#' 
-#' series = c(1,2,3,4,NA,4,3,2,1)
+#'
+#' series <- c(1,2,3,4,NA,4,3,2,1)
 #' cat(asciiPlot(series, list('min' = 0)))
 #'
 #' \dontrun{
 #' cat(asciiPlot(c(NA, NA)))
 #' }
+#' @export
 asciiPlot <- function(series, cfg=list()) {
   if (length(series) == 0 || sum(!is.na(series)) == 0) {
     return()
