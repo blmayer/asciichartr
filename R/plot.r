@@ -38,15 +38,15 @@ asciiPlot <- function(series, cfg=list()) {
   minimum <- ifelse(is.null(cfg[["min"]]), min(series, na.rm=TRUE), cfg[["min"]])
   maximum <- ifelse(is.null(cfg[["max"]]), max(series, na.rm=TRUE), cfg[["max"]])
   symbols <- if (is.null(cfg[["symbols"]])) {
-    c('┼', '┤', '╶', '╴', '─', '╰', '╭', '╮', '╯', '│')
+    sapply(c(9532, 9508, 9590, 9588, 9472, 9584, 9581, 9582, 9583, 9474), intToUtf8)
   } else {
     cfg[["symbols"]]
   }
-  
+
   if (minimum > maximum) {
     stop("The minimum value cannot exceed the maximum value.")
   }
-  
+
   interval <- maximum - minimum
   offset <- ifelse(is.null(cfg[["offset"]]), 3, cfg[["offset"]])
   height <- ifelse(is.null(cfg[["height"]]), interval, cfg[["height"]])
