@@ -65,8 +65,8 @@ asciiPlot <- function(series, cfg=list()) {
   
   rows <- max2 - min2
   width <- length(series) + offset
-  placeholder <- ifelse(is.null(cfg[["format"]]), "%.2f", cfg[["format"]])
-  
+  placeholder <- ifelse(is.null(cfg[["format"]]), "%8.2f", cfg[["format"]])
+
   result <- array(' ' , c(rows+1, width))
   
   # axis and labels
