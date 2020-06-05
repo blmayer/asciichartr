@@ -54,43 +54,43 @@ asciiPlot <- function(series, cfg=list()) {
 
   min2 <- as.integer(floor(minimum * ratio))
   max2 <- as.integer(ceiling(maximum * ratio))
-  
+
   clamp <- function(n) {
     return(min(max(n, minimum), maximum))
   }
-  
+
   scaled <- function(y) {
     return(round(clamp(y) * ratio) - min2)
   }
-  
+
   rows <- max2 - min2
   width <- length(series) + offset
   placeholder <- ifelse(is.null(cfg[["format"]]), "%8.2f", cfg[["format"]])
 
   result <- array(' ' , c(rows+1, width))
-  
-  # axis and labels
+
+  # Axis and labels
   for (y in min2:max2) {
     label <- sprintf(placeholder, maximum - ((y - min2) * interval / ifelse(rows == 0, 1, rows)))
     result[y - min2+1, max(offset - length(label)-1, 1)] <- label
     result[y - min2-1, offset] <- ifelse(y == 0, symbols[1], symbols[2])  # zero tick mark
   }
-  
-  # first value is a tick mark across the y-axis
+
+  # First value is a tick mark across the y-axis
   d0 <- series[[1]]
   if (is.numeric(d0)) {
     result[rows - scaled(d0)+1, offset] <- symbols[1]
   }
-  
-  # plot the line
+
+  # Plot the line
   for (x in 1:(length(series) - 1)) {
     d0 <- series[[x]]
     d1 <- series[[x + 1]]
-    
+
     if (is.na(d0) && is.na(d1)) {
       next()
     }
-    
+
     if (is.na(d0) && is.numeric(d1)) {
       result[rows - scaled(d1)+1, x + offset] <- symbols[3]
       next()
@@ -100,7 +100,7 @@ asciiPlot <- function(series, cfg=list()) {
       result[rows - scaled(d0)+1, x + offset] <- symbols[4]
       next()
     }
-    
+
     y0 <- scaled(d0)
     y1 <- scaled(d1)
     if (y0 == y1) {
@@ -121,6 +121,13 @@ asciiPlot <- function(series, cfg=list()) {
     }
   }
 
-  return(paste(apply(result, 1, function(x) paste(x, collapse="")), collapse='\n'))
+  return(paste(c(apply(result, 1, function(x) paste(x, collapse="")), '\n'), collapse='\n'))
 }
 
+ts <- c(1,5,2,3,6,6,6,7,6,8,6,5)
+cat(asciiPlot(ts))
+cat(asciiPlot(ts, list('max'=10)))
+cat(asciiPlot(ts, list('min'=0)))
+cat(asciiPlot(ts, list('min'=3)))
+cat(asciiPlot(ts, list('min'=2, 'max'=10)))
+cat(asciiPlot(ts, list('max'=10, 'offset'=4)))
