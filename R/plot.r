@@ -79,7 +79,7 @@ asciiPlot <- function(series, cfg=list()) {
   # first value is a tick mark across the y-axis
   d0 <- series[[1]]
   if (is.numeric(d0)) {
-    result[rows - scaled(d0)+1, offset] <- symbols[[1]]
+    result[rows - scaled(d0)+1, offset] <- symbols[1]
   }
   
   # plot the line
@@ -92,32 +92,32 @@ asciiPlot <- function(series, cfg=list()) {
     }
     
     if (is.na(d0) && is.numeric(d1)) {
-      result[rows - scaled(d1)+1, x + offset] <- symbols[[3]]
+      result[rows - scaled(d1)+1, x + offset] <- symbols[3]
       next()
     }
 
     if (is.numeric(d0) && is.na(d1)) {
-      result[rows - scaled(d0)+1, x + offset] <- symbols[[4]]
+      result[rows - scaled(d0)+1, x + offset] <- symbols[4]
       next()
     }
     
     y0 <- scaled(d0)
     y1 <- scaled(d1)
     if (y0 == y1) {
-      result[rows - y0+1, x + offset] <- symbols[[5]]
+      result[rows - y0+1, x + offset] <- symbols[5]
       next()
     }
-    
-    result[rows - y1+1, x + offset] <- ifelse(y0 > y1, symbols[[6]], symbols[[7]])
-    result[rows - y0+1, x + offset] <- ifelse(y0 > y1, symbols[[8]], symbols[[9]])
-    
+
+    result[rows - y1+1, x + offset] <- ifelse(y0 > y1, symbols[6], symbols[7])
+    result[rows - y0+1, x + offset] <- ifelse(y0 > y1, symbols[8], symbols[9])
+
     start <- min(y0, y1)+1
     end <- max(y0, y1) - 1
     if (end < start) {
       next()
     }
     for (y in start:end) {
-      result[rows - y+1, x + offset] <- symbols[[10]]
+      result[rows - y+1, x + offset] <- symbols[10]
     }
   }
   
