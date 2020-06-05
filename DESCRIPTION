@@ -1,0 +1,17 @@
+Package: asciichartr
+Type: Package
+Title: A package to make lightweight ASCII line graphs
+Version: 0.1.0
+Author: Brian Lee Mayer
+Maintainer: Brian <bleemayer@gmail.com>
+Description: This package provides one simple function to print
+    a time series directly on your terminal. There are some configs
+    you can add to make the plot the way you like. This project
+    was inspired by the original asciichart package for NodeJS by
+    Igor Kroitor.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports:
+    methods
+RoxygenNote: 6.1.1
