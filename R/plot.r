@@ -120,7 +120,7 @@ asciiPlot <- function(series, cfg=list()) {
       result[rows - y+1, x + offset] <- symbols[10]
     }
   }
-  
-  return(paste(apply(res, 1, function(x) paste(x, collapse="")), collapse='\n'))
+
+  return(paste(apply(result, 1, function(x) paste(x, collapse="")), collapse='\n'))
 }
 
