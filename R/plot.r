@@ -124,10 +124,3 @@ asciiPlot <- function(series, cfg=list()) {
   return(paste(c(apply(result, 1, function(x) paste(x, collapse="")), '\n'), collapse='\n'))
 }
 
-ts <- c(1,5,2,3,6,6,6,7,6,8,6,5)
-cat(asciiPlot(ts))
-cat(asciiPlot(ts, list('max'=10)))
-cat(asciiPlot(ts, list('min'=0)))
-cat(asciiPlot(ts, list('min'=3)))
-cat(asciiPlot(ts, list('min'=2, 'max'=10)))
-cat(asciiPlot(ts, list('max'=10, 'offset'=4)))
