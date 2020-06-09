@@ -1,1 +1,4 @@
-This is my first submission! Thank you very much for your time.
+# Changes from last submission
+
+- Fixed typo on description file
+- Corrected LICENSE file to only include holder info
