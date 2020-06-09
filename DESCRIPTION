@@ -4,8 +4,8 @@ Title: Lightweight ASCII Line Graphs
 Version: 0.1.0
 Author: Brian Lee Mayer
 Maintainer: Brian <bleemayer@gmail.com>
-Description: Create ASCII line graphs of a time series directly 
-    on your terminal in an easy way. There are some configs you
+Description: Create ASCII line graphs of a time series directly on
+    your terminal in an easy way. There are some configurations you
     can add to make the plot the way you like. This project was
     inspired by the original 'asciichart' package by Igor Kroitor.
 License: MIT + file LICENSE
