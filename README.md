@@ -1,5 +1,7 @@
 # asciichartr
 
+![](http://cranlogs.r-pkg.org/badges/grand-total/asciichartr)
+
 > Print charts directly on your R terminal. This is a port for
 > the R programming language.
 
