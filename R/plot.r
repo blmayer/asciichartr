@@ -8,7 +8,7 @@
 #' @param cfg A named list with some options: \code{height} specifies the
 #' number of rows the graph should occupy. It can be  used to scale down a
 #' graph with large data values. \code{format} specifies a C format string
-#' used to format the labels on the y-axis. The default value is "%.2f".
+#' used to format the labels on the y-axis. The default value is "%8.2f".
 #' \code{symbols} provides a list of single characters to use for drawing
 #' the curve. \code{offset} changes what column will the y-axis be drawn.
 #' Default is 3. \code{min} and \code{max} will clamp the y-axis and all
@@ -69,10 +69,17 @@ asciiPlot <- function(series, cfg=list()) {
 
   result <- array(' ' , c(rows+1, width))
 
+  # Max label size
+  len <- 1
+  for (y in min2:max2) {
+    label <- sprintf(placeholder, maximum - ((y - min2) * interval / ifelse(rows == 0, 1, rows)))
+    len <- max(nchar(label), len)
+  }
+
   # Axis and labels
   for (y in min2:max2) {
     label <- sprintf(placeholder, maximum - ((y - min2) * interval / ifelse(rows == 0, 1, rows)))
-    result[y - min2+1, max(offset - length(label)-1, 1)] <- label
+    result[y - min2+1, max(offset - len - 1, 1)] <- sprintf("%*s", len, label)
     result[y - min2-1, offset] <- ifelse(y == 0, symbols[1], symbols[2])  # zero tick mark
   }
 
@@ -124,3 +131,20 @@ asciiPlot <- function(series, cfg=list()) {
   return(paste(c(apply(result, 1, function(x) paste(x, collapse="")), '\n'), collapse='\n'))
 }
 
+# Quick testing
+#cat(asciiPlot(
+#  c(
+#    5853374.096889666, 6567593.007548633, 7237488.47608913, 8129990.376018125, 0,
+#    7307391.963571889, 6838011.6941423565, 7832711.560383536, 6947350.485845904,
+#    0, 7502413.225468244, 8139093.74958642, 7643710.526556756, 0, 0
+#  ),
+#  cfg = list(height = 10)
+#))
+#cat(asciiPlot(
+#  c(
+#    15853.06, 6593.00, 7288.47, 8190.3, 0,
+#    3731.935, 6811.694, 7831.536, 6950.44,
+#    0, 7503.24, 8193.7, 7610.5, 10, 0
+#  ),
+#  cfg = list(height = 10)
+#))
